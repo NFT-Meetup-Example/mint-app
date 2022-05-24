@@ -31,11 +31,14 @@ const MAINNET = {
     }]
 }
 
+const NETWORK = TESTNET;
+// const NETWORK = MAINNET;
+
 class _walletManager {
-    // status
-    // null     => not connected
-    // false    => trying to connect
-    // true     => connect
+    /// status
+    /// null     => not connected
+    /// false    => trying to connect
+    /// true     => connect
 
     walletStatus = false;
     web3Global = false;
@@ -60,20 +63,19 @@ class _walletManager {
                 err = error;
             }
         } else {
-            this.web3Global = new ethers.providers.JsonRpcProvider(MAINNET.params[0].rpcUrls[0]);
+            this.web3Global = new ethers.providers.JsonRpcProvider(NETWORK.params[0].rpcUrls[0]);
             err = "Metamask not found!";
         }
 
         if (window.ethereum) {
-            await window.ethereum.request(MAINNET).catch((error) => {
+            await window.ethereum.request(NETWORK).catch((error) => {
                 this.walletStatus = false;
                 err = error;
             });
 
             await window.ethereum.request({
                 method: 'wallet_switchEthereumChain',
-                // params: [{ chainId: '0x89' }], // Polygon Mainnet
-                params: [{ chainId: '0x13881' }], // Polygon Testnet
+                params: [{ chainId: NETWORK.params[0].chainId }],
             }).catch((error) => {
                 this.walletStatus = false;
                 err = error;
@@ -91,7 +93,7 @@ class _walletManager {
 
     async checkId() {
         let network = await this.web3Global.getNetwork();
-        if (network.chainId != MAINNET.params[0].chainId) {
+        if (network.chainId != NETWORK.params[0].chainId) {
             await this.connectToMetamask();
         }
     }
