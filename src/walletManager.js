@@ -31,8 +31,8 @@ const MAINNET = {
     }]
 }
 
-const NETWORK = TESTNET;
-// const NETWORK = MAINNET;
+// const NETWORK = TESTNET;
+const NETWORK = MAINNET;
 
 class _walletManager {
     /// status
@@ -44,7 +44,7 @@ class _walletManager {
     web3Global = false;
     ethers = ethers;
 
-    nftAddr = "0xbcAE3e2893722698535aaf355F0aA92CA846354F";
+    nftAddr = "0x5BA0199Fe60b2422a59940ec7c7dE188359388B1";
 
     constructor() {
         this.connectToMetamask();
