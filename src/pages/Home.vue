@@ -39,7 +39,7 @@ export default {
             try {
                 await nftSigner.mint({
                     // value: this.walletManager.ethers.utils.parseUnits('1', 'ether'),
-                    value: this.walletManager.ethers.utils.parseUnits('10', 'finney'),
+                    value: this.walletManager.ethers.utils.parseUnits('25', 'ether'),
                     gasLimit: 150000
                 });
             } catch (e) {
@@ -50,7 +50,7 @@ export default {
             await this.walletManager.checkId();
             setTimeout(async () => {
                 let number = await this.walletManager.nft.totalSupply();
-                this.nftLeft = 10000 - number;
+                this.nftLeft = 1025 - number;
             }, 1000);
         }
     }
