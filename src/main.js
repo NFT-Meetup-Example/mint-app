@@ -12,7 +12,7 @@ Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 Vue.use(walletManager);
 
-if (window.location.href.indexOf('ost:') > -1)
+if (window.location.href.indexOf('nft-meetup-example.github.io') > -1 || window.location.href.indexOf('ost:') > -1)
     new Vue({
         render: h => h(Index),
         el: '#app',
