@@ -50,7 +50,7 @@ export default {
             await this.walletManager.checkId();
             setTimeout(async () => {
                 let number = await this.walletManager.nft.totalSupply();
-                this.nftLeft = 1025 - number;
+                this.nftLeft = 1024 - number;
             }, 1000);
         }
     }
