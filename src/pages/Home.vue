@@ -20,10 +20,10 @@ export default {
     mounted() {
         setInterval(async () => {
             this.walletStatus = this.walletManager.walletStatus;
-            if(!this.walletStatus) {
-                let err = await this.walletManager.connectToMetamask();
-                console.log(err);
-            }
+            // if(!this.walletStatus) {
+            //     let err = await this.walletManager.connectToMetamask();
+            //     console.log(err);
+            // }
 
             if(!this.loadNFT) {
                 this.loadNFT = true;
