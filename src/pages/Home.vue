@@ -3,10 +3,11 @@
         <div class="mint">
             <h1>NFT Meetup Example</h1>
             <h3>NFT left : {{ nftLeft }}</h3>
-            <button @click="getNFT()">
+            <button v-if="this.walletStatus" @click="getNFT()">
                 <img src="/snowflake.svg" />
                 Mint
             </button>
+            <button v-else @click="connect()">Connect Wallet</button>
             <a href="https://opensea.io/collection/non-fungible-token-8">VIEW AN NFT ON OPENSEA</a>
         </div>
     </div>
@@ -25,10 +26,6 @@ export default {
     mounted() {
         setInterval(async () => {
             this.walletStatus = this.walletManager.walletStatus;
-            // if(!this.walletStatus) {
-            //     let err = await this.walletManager.connectToMetamask();
-            //     console.log(err);
-            // }
 
             if(!this.loadNFT) {
                 this.loadNFT = true;
@@ -37,6 +34,12 @@ export default {
         }, 100);
     },
     methods: {
+        async connect() {
+            let err = await this.walletManager.connectToMetamask();
+            if (err != "") {
+                window.location = "https://metamask.app.link/dapp/nft-meetup-example.github.io";
+            }
+        },
         async getNFT() {
             let signer = await this.walletManager.web3Global.getSigner();
             let nftSigner = this.walletManager.nft.connect(signer);
